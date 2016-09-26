@@ -1,0 +1,26 @@
+{
+  "name": "battleship-game",
+  "version": "1.0.0",
+  "description": "a battleship game",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tevko/battleship-game.git"
+  },
+  "keywords": [
+    "battleship",
+    "game"
+  ],
+  "author": "Tim Evko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tevko/battleship-game/issues"
+  },
+  "homepage": "https://github.com/tevko/battleship-game#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
