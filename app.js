@@ -1,11 +1,15 @@
 const express = require('express');
 const app = express();
-const apiController = '/controllers/ap/');
+const apiController = 'controllers/api';
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //API Routing
 
 //create new game
-app.put('/api/newgame/', require(`/${apiController}/createGame`));
+app.put('/api/newgame/', require(`./${apiController}/createGame`));
 
 app.delete('/api/destroygame/', (req, res, next) => {
 	//delete game
