@@ -3,6 +3,21 @@
 const btlSHP = window.btlSHP = window.btlSHP || {};
 
 btlSHP.game = {
+	state: {
+		compBoard: undefined,
+		playerBoard: undefined,
+		gameInitiated: false,
+		userCoordsRecieved: false,
+		score: {
+			user: 0,
+			computer: 0
+		}
+	},
+
+	init() {
+		console.log(this);
+		this.state.compBoard = this.create();
+	},
 
 	create() {
 		/***
@@ -32,10 +47,12 @@ btlSHP.game = {
 			}
 		});
 
-		if (app.locals.games === undefined) {
-			app.locals.games = {};
-		}
-
 		return compGameBoard
+	},
+
+	reset() {
+		confirm('Are you sure? All progress will be lost. gone. forever :c') && window.location.reload();
 	}
 };
+
+window.addEventListener('DOMContentLoaded', btlSHP.game.init.bind(btlSHP.game));

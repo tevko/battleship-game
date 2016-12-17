@@ -1,0 +1,35 @@
+html {
+	box-sizing: border-box;
+}
+
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+body {
+	margin: 0 auto;
+	padding: 1em;
+	max-width: 600px;
+}
+
+input {
+	display: block;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+ol {
+	margin: 0;
+	padding: 20px;
+	font-weight: normal;
+}
+
+summary, details {
+	outline: none;
+	color: white;
+	font-weight: bold;
+}
+
+.rules {
+	background-color: purple;
+}
