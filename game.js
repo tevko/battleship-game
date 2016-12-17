@@ -8,6 +8,7 @@ btlSHP.game = {
 		playerBoard: undefined,
 		gameInitiated: false,
 		userCoordsRecieved: false,
+		vessels: ['carrier', 'battleship', 'jetski', 'armed_octopus', 'squirtgun', 'garden_hose'],
 		score: {
 			user: 0,
 			computer: 0
@@ -15,8 +16,9 @@ btlSHP.game = {
 	},
 
 	init() {
-		console.log(this);
 		this.state.compBoard = this.create();
+
+		document.querySelector('._JS_submitBoard').addEventListener('click', this.validateUserControls);
 	},
 
 	create() {
@@ -24,7 +26,6 @@ btlSHP.game = {
 		*** Creates a computer gameboard
 		***/
 		const playerGameBoard = {};
-		const vessels = ['carrier', 'battleship', 'jetski', 'armed octopus', 'squirtgun', 'garden hose'];
 		const usedCoords = [];
 		const returnNewCoords = () => [Math.floor(Math.random() * (6 - 1 + 1) + 1), Math.floor(Math.random() * (6 - 1 + 1) + 1)];
 		const returnAvailableCoords = arr => {
@@ -38,9 +39,9 @@ btlSHP.game = {
 		};
 		const compGameBoard = {};
 
-		vessels.forEach(vessel => {
+		this.state.vessels.forEach(vessel => {
 			const coords = returnAvailableCoords(usedCoords);
-			compGameBoard[vessel.replace(' ', '_')] = {
+			compGameBoard[vessel] = {
 				x: coords[0],
 				y: coords[1],
 				vessel
@@ -48,6 +49,11 @@ btlSHP.game = {
 		});
 
 		return compGameBoard
+	},
+
+	validateUserControls() {
+
+
 	},
 
 	reset() {
