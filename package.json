@@ -19,12 +19,5 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/tevko/battleship-game/issues"
-  },
-  "homepage": "https://github.com/tevko/battleship-game#readme",
-  "dependencies": {
-    "express": "^4.14.0"
-  },
-  "devDependencies": {
-    "body-parser": "^1.15.2"
   }
 }
