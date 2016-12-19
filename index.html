@@ -1,5 +1,6 @@
 <!DOCTYPE	html>
 <head>
+	<title>BATTLESHIP!!!!1!</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="style.css">
 </head>
@@ -21,41 +22,45 @@
 	<p>pls enter your coordinates - no duplicates</p>
 	<label for="octopus">octopus</label>
 	<div class="row" data-for="armed_octopus">
-		X: <input name="octopus" id="octopus1" type="number" min="1" max="6">
-		Y: <input name="octopus" id="octopus2" type="number" min="1" max="6">
+		X: <input name="octopusX" id="octopus1" type="number" min="1" max="6">
+		Y: <input name="octopusY" id="octopus2" type="number" min="1" max="6">
 		<span class="hidden validate-error">Please enter a number between 1 and 6</span>
 	</div>
 	<label for="battleship">battleship</label>
 	<div class="row" data-for="battleship">
-		X: <input name="battleship" id="battleship1" type="number" min="1" max="6">
-		Y: <input name="battleship" id="battleship2" type="number" min="1" max="6">
+		X: <input name="battleshipX" id="battleship1" type="number" min="1" max="6">
+		Y: <input name="battleshipY" id="battleship2" type="number" min="1" max="6">
 		<span class="hidden validate-error">Please enter a number between 1 and 6</span>
 	</div>
 	<label for="carrier">carrier</label>
 	<div class="row" data-for="carrier">
-		X: <input name="carrier" id="carrier1" type="number" min="1" max="6">
-		Y: <input name="carrier" id="carrier2" type="number" min="1" max="6">
+		X: <input name="carrierX" id="carrier1" type="number" min="1" max="6">
+		Y: <input name="carrierY" id="carrier2" type="number" min="1" max="6">
 		<span class="hidden validate-error">Please enter a number between 1 and 6</span>
 	</div>
 	<label for="gardenhose">gardenhose</label>
 	<div class="row" data-for="garden_hose">
-		X: <input name="gardenhose" id="gardenhose1" type="number" min="1" max="6">
-		Y: <input name="gardenhose" id="gardenhose2" type="number" min="1" max="6">
+		X: <input name="gardenhoseX" id="gardenhose1" type="number" min="1" max="6">
+		Y: <input name="gardenhoseY" id="gardenhose2" type="number" min="1" max="6">
 		<span class="hidden validate-error">Please enter a number between 1 and 6</span>
 	</div>
 	<label for="jetski">jetski</label>
 	<div class="row" data-for="jetski">
-		X: <input name="jetski" id="jetski1" type="number" min="1" max="6">
-		Y: <input name="jetski" id="jetski2" type="number" min="1" max="6">
+		X: <input name="jetskiX" id="jetski1" type="number" min="1" max="6">
+		Y: <input name="jetskiY" id="jetski2" type="number" min="1" max="6">
 		<span class="hidden validate-error">Please enter a number between 1 and 6</span>
 	</div>
 	<label for="squirtgun">squirtgun</label>
 	<div class="row" data-for="squirtgun">
-		X: <input name="squirtgun" id="squirtgun1" type="number" min="1" max="6">
-		Y: <input name="squirtgun" id="squirtgun2" type="number" min="1" max="6">
+		X: <input name="squirtgunX" id="squirtgun1" type="number" min="1" max="6">
+		Y: <input name="squirtgunY" id="squirtgun2" type="number" min="1" max="6">
 		<span class="hidden validate-error">Please enter a number between 1 and 6</span>
 	</div>
-
+	<span class="hidden validate-error _JS_invalidCoords">
+		Please make sure each x and y column does not contain repeating numbers!
+		<br>
+		Please make sure all entries are filled!
+	</span>
 	<button class="_JS_submitBoard">submit</button>
 </section>
 

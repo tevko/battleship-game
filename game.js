@@ -18,7 +18,13 @@ btlSHP.game = {
 	init() {
 		this.state.compBoard = this.create();
 
-		document.querySelector('._JS_submitBoard').addEventListener('click', this.validateUserControls);
+		document.querySelector('._JS_submitBoard').addEventListener('click', () => {
+			if (this.validateUserCoords('X') && this.validateUserCoords('Y')) {
+				this.createUserBoard();
+			} else {
+				this.setValidationError()
+			}
+		});
 	},
 
 	create() {
@@ -51,9 +57,31 @@ btlSHP.game = {
 		return compGameBoard
 	},
 
-	validateUserControls() {
+	validateUserCoords(plane) {
+		/**	
+		 * ensures user does not enter repeating coordinates
+		 */
+		const inputs = Array.apply(null, document.querySelectorAll('input')).filter(inp => inp.name.indexOf(plane) !== -1);
+		const values = inputs.map(i => i.value);
+		document.querySelector('._JS_invalidCoords').classList.add('hidden');
+		return values.every((v, idx, arr) => arr.indexOf(v) === idx && v !== '');
 
+	},
 
+	setValidationError() {
+		document.querySelector('._JS_invalidCoords').classList.remove('hidden');
+	},
+
+	createUserBoard() {
+		const vesselInputs = documemnt.querySelectorAll('[data-for]');
+
+		vesselInputs.forEach(inp => {
+			const shipName = inp.getAttribute('data-for');
+			const X = inp.querySelector(`[${shipName}X]`);
+			const Y = inp.querySelector(`[${shipName}Y]`);
+
+			console.log(X,Y)
+		});
 	},
 
 	reset() {
