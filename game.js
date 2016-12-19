@@ -19,7 +19,8 @@ btlSHP.game = {
 		this.state.compBoard = this.create();
 
 		document.querySelector('._JS_submitBoard').addEventListener('click', () => {
-			if (this.validateUserCoords('X') && this.validateUserCoords('Y')) {
+			document.querySelector('._JS_invalidCoords').classList.add('hidden');
+			if (this.validateUserCoords('X', document.querySelectorAll('input')) && this.validateUserCoords('Y', document.querySelectorAll('input'))) {
 				this.createUserBoard();
 			} else {
 				this.setValidationError()
@@ -57,13 +58,12 @@ btlSHP.game = {
 		return compGameBoard
 	},
 
-	validateUserCoords(plane) {
+	validateUserCoords(plane, nodelist) {
 		/**	
 		 * ensures user does not enter repeating coordinates
 		 */
-		const inputs = Array.apply(null, document.querySelectorAll('input')).filter(inp => inp.name.indexOf(plane) !== -1);
+		const inputs = Array.apply(null, nodelist).filter(inp => inp.name.indexOf(plane) !== -1);
 		const values = inputs.map(i => i.value);
-		document.querySelector('._JS_invalidCoords').classList.add('hidden');
 		return values.every((v, idx, arr) => arr.indexOf(v) === idx && v !== '');
 
 	},
