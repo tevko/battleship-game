@@ -86,6 +86,7 @@ btlSHP.game = {
 			};
 		});
 		this.state.playerBoard = playerBoard;
+		this.state.userCoordsRecieved = true;
 		console.log(this.state);
 	},
 
