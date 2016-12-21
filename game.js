@@ -8,7 +8,7 @@ btlSHP.game = {
 		playerBoard: undefined,
 		gameInitiated: false,
 		userCoordsRecieved: false,
-		vessels: ['carrier', 'battleship', 'jetski', 'armed_octopus', 'squirtgun', 'garden_hose'],
+		vessels: ['carrier', 'battleship', 'jetski', 'armedoctopus', 'squirtgun', 'gardenhose'],
 		score: {
 			user: 0,
 			computer: 0
@@ -21,9 +21,9 @@ btlSHP.game = {
 		document.querySelector('._JS_submitBoard').addEventListener('click', () => {
 			document.querySelector('._JS_invalidCoords').classList.add('hidden');
 			if (this.validateUserCoords('X', document.querySelectorAll('input')) && this.validateUserCoords('Y', document.querySelectorAll('input'))) {
-				this.createUserBoard();
+				this.createUserBoard(document.querySelectorAll('[data-for]'));
 			} else {
-				this.setValidationError()
+				this.setValidationErrorOnDom(document.querySelector('._JS_invalidCoords').classList);
 			}
 		});
 	},
@@ -32,7 +32,6 @@ btlSHP.game = {
 		/***
 		*** Creates a computer gameboard
 		***/
-		const playerGameBoard = {};
 		const usedCoords = [];
 		const returnNewCoords = () => [Math.floor(Math.random() * (6 - 1 + 1) + 1), Math.floor(Math.random() * (6 - 1 + 1) + 1)];
 		const returnAvailableCoords = arr => {
@@ -59,7 +58,7 @@ btlSHP.game = {
 	},
 
 	validateUserCoords(plane, nodelist) {
-		/**	
+		/**
 		 * ensures user does not enter repeating coordinates
 		 */
 		const inputs = Array.apply(null, nodelist).filter(inp => inp.name.indexOf(plane) !== -1);
@@ -68,20 +67,26 @@ btlSHP.game = {
 
 	},
 
-	setValidationError() {
-		document.querySelector('._JS_invalidCoords').classList.remove('hidden');
+	setValidationErrorOnDom(nodeClassList) {
+		nodeClassList.remove('hidden');
 	},
 
-	createUserBoard() {
-		const vesselInputs = documemnt.querySelectorAll('[data-for]');
-
+	createUserBoard(vesselInputs) {
+		const playerBoard = {};
 		vesselInputs.forEach(inp => {
-			const shipName = inp.getAttribute('data-for');
-			const X = inp.querySelector(`[${shipName}X]`);
-			const Y = inp.querySelector(`[${shipName}Y]`);
+			//not touching dom, just filtering through recieved nodelist
+			const vessel = inp.getAttribute('data-for');
+			const x = Number(inp.querySelector(`[name=${vessel}X]`).value);
+			const y = Number(inp.querySelector(`[name=${vessel}Y]`).value);
 
-			console.log(X,Y)
+			playerBoard[vessel] = {
+				x,
+				y,
+				vessel
+			};
 		});
+		this.state.playerBoard = playerBoard;
+		console.log(this.state);
 	},
 
 	reset() {
