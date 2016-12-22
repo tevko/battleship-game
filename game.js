@@ -22,6 +22,7 @@ btlSHP.game = {
 			document.querySelector('._JS_invalidCoords').classList.add('hidden');
 			if (this.validateUserCoords('X', document.querySelectorAll('input')) && this.validateUserCoords('Y', document.querySelectorAll('input'))) {
 				this.createUserBoard(document.querySelectorAll('[data-for]'));
+				this.hide(document.querySelector('._JS_gameControls').classList);
 			} else {
 				this.setValidationErrorOnDom(document.querySelector('._JS_invalidCoords').classList);
 			}
@@ -92,6 +93,14 @@ btlSHP.game = {
 
 	reset() {
 		confirm('Are you sure? All progress will be lost. gone. forever :c') && window.location.reload();
+	},
+
+	hide(domNodeClassList) {
+		domNodeClassList.add('hidden');
+	},
+
+	show(domNodeClassList) {
+		domNodeClassList.remove('hidden');
 	}
 };
 
