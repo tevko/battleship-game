@@ -81,3 +81,23 @@ summary, details {
 .gameTile:nth-child(12n) {
     background-color: purple;
 }
+
+nav {
+	margin-top: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+nav button {
+	border: none;
+	padding: 10px;
+	width: 205px;
+	font-weight: bold;
+	color: white;
+	margin: 0px 5px;
+}
+
+nav button.active {
+	border: solid 1px orange;
+}

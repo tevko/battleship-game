@@ -21,11 +21,18 @@ btlSHP.game = {
 		document.querySelector('._JS_submitBoard').addEventListener('click', () => {
 			document.querySelector('._JS_invalidCoords').classList.add('hidden');
 			if (this.validateUserCoords('X', document.querySelectorAll('input')) && this.validateUserCoords('Y', document.querySelectorAll('input'))) {
-				this.createUserBoard(document.querySelectorAll('[data-for]'));
+				this.state.playerBoard = this.createUserBoard(document.querySelectorAll('[data-for]'));
+				this.state.userCoordsRecieved = true;
 				this.hide(document.querySelector('._JS_gameControls').classList);
+				this.show(document.querySelector('._JS_userGameBoard ').classList);
+				this.state.gameInitiated= true;
 			} else {
 				this.setValidationErrorOnDom(document.querySelector('._JS_invalidCoords').classList);
 			}
+		});
+
+		document.querySelector('._JS_userGameBoard').addEventListener('click', () => {
+
 		});
 	},
 
@@ -65,7 +72,6 @@ btlSHP.game = {
 		const inputs = Array.apply(null, nodelist).filter(inp => inp.name.indexOf(plane) !== -1);
 		const values = inputs.map(i => i.value);
 		return values.every((v, idx, arr) => arr.indexOf(v) === idx && v !== '');
-
 	},
 
 	setValidationErrorOnDom(nodeClassList) {
@@ -86,9 +92,8 @@ btlSHP.game = {
 				vessel
 			};
 		});
-		this.state.playerBoard = playerBoard;
-		this.state.userCoordsRecieved = true;
-		console.log(this.state);
+
+		return playerBoard
 	},
 
 	reset() {
