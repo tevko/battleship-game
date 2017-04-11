@@ -16,24 +16,33 @@ btlSHP.game = {
 	},
 
 	init() {
-		this.state.compBoard = this.create();
+		if (localStorage.gameState) {
+			this.state = localStorage.gameState;
+			this.initiateGame();
+		} else {
+			this.state.compBoard = this.create();
 
-		document.querySelector('._JS_submitBoard').addEventListener('click', () => {
-			document.querySelector('._JS_invalidCoords').classList.add('hidden');
-			if (this.validateUserCoords('X', document.querySelectorAll('input')) && this.validateUserCoords('Y', document.querySelectorAll('input'))) {
-				this.state.playerBoard = this.createUserBoard(document.querySelectorAll('[data-for]'));
-				this.state.userCoordsRecieved = true;
-				this.hide(document.querySelector('._JS_gameControls').classList);
-				this.show(document.querySelector('._JS_userGameBoard ').classList);
-				this.state.gameInitiated= true;
-			} else {
-				this.setValidationErrorOnDom(document.querySelector('._JS_invalidCoords').classList);
-			}
-		});
+			document.querySelector('._JS_submitBoard').addEventListener('click', () => {
+				this.initiateGame();
+			});
+		}
 
-		document.querySelector('._JS_userGameBoard').addEventListener('click', () => {
+		document.querySelector('._JS_userGameBoard').addEventListener('click', e => {
 
 		});
+	},
+
+	initiateGame() {
+		document.querySelector('._JS_invalidCoords').classList.add('hidden');
+		if (this.validateUserCoords(document.querySelectorAll('input'))) {
+			this.state.playerBoard = this.createUserBoard(document.querySelectorAll('[data-for]'));
+			this.state.userCoordsRecieved = true;
+			this.hide(document.querySelector('._JS_gameControls').classList);
+			this.show(document.querySelector('._JS_userGameBoard ').classList);
+			this.state.gameInitiated = true;
+		} else {
+			this.setValidationErrorOnDom(document.querySelector('._JS_invalidCoords').classList);
+		}
 	},
 
 	create() {
@@ -65,13 +74,15 @@ btlSHP.game = {
 		return compGameBoard
 	},
 
-	validateUserCoords(plane, nodelist) {
+	validateUserCoords(nodelist) {
 		/**
-		 * ensures user does not enter repeating coordinates
+		 * ensures each vessel is on a unique point
 		 */
-		const inputs = Array.apply(null, nodelist).filter(inp => inp.name.indexOf(plane) !== -1);
-		const values = inputs.map(i => i.value);
-		return values.every((v, idx, arr) => arr.indexOf(v) === idx && v !== '');
+		const coordPairs = [];
+		const inputs = Array.apply(null, nodelist);
+
+		inputs.forEach((inp, idx) => (idx % 2 === 0 && idx !== 0) && coordPairs.push(inputs[idx].value + '|' + inputs[idx - 1].value));
+		return coordPairs.every((arr, idx) => coordPairs.indexOf(arr) === idx);
 	},
 
 	setValidationErrorOnDom(nodeClassList) {
