@@ -31,7 +31,7 @@ input:invalid ~ .validate-error {
 }
 
 .hidden {
-	display: none;
+	display: none !important;
 }
 
 .validate-error {
@@ -65,16 +65,19 @@ summary {
 
 .gameBoard {
 	margin-top: 20px;
-	border: solid 2px;
-    padding: 3px 3px 0px 3px;
+    border: solid 2px;
+    padding: 3px 3px 0 3px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .gameTile {
-	width: 16.07%;
-	display: inline-block;
-	height: 0;
-	padding-top: 16.07%;
-	background-color: orange;
+	padding-top: 16%;
+    background-color: orange;
+    flex-basis: 16%;
+    margin-bottom: 5px;
 }
 
 .gameTile:nth-child(12n+1),
