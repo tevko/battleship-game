@@ -18,14 +18,14 @@
 	</details>
 </section>
 
-<nav>
+<nav class="hidden _JS_boardSwitcher">
 	<button class="_JS_showCompGameBoard">Show Computer Game Board</button>
 	<button class="_JS_showUserGameBoard">Show My Game Board</button>
 </nav>
 
 <section class="gameControls _JS_gameControls">
 	<p>pls enter your coordinates - no duplicates</p>
-	<label for="octopus">octopus</label>
+	<label for="octopus">armed octopus</label>
 	<div class="row" data-for="armedoctopus">
 		X: <input name="armedoctopusX" id="octopus1" type="number" min="1" max="6">
 		Y: <input name="armedoctopusY" id="octopus2" type="number" min="1" max="6">
@@ -109,42 +109,42 @@
 </section>
 
 <section class="_JS_compGameBoard gameBoard hidden">
-	<div class="_JS_gameTile gameTile" data-coordPoint="1-1"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="1-2"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="1-3"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="1-4"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="1-5"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="1-6"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="2-1"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="2-2"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="2-3"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="2-4"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="2-5"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="2-6"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="3-1"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="3-2"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="3-3"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="3-4"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="3-5"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="3-6"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="4-1"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="4-2"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="4-3"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="4-4"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="4-5"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="4-6"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="5-1"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="5-2"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="5-3"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="5-4"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="5-5"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="5-6"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="6-1"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="6-2"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="6-3"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="6-4"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="6-5"></div>
-	<div class="_JS_gameTile gameTile" data-coordPoint="6-6"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="1-1"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="1-2"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="1-3"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="1-4"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="1-5"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="1-6"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="2-1"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="2-2"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="2-3"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="2-4"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="2-5"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="2-6"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="3-1"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="3-2"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="3-3"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="3-4"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="3-5"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="3-6"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="4-1"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="4-2"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="4-3"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="4-4"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="4-5"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="4-6"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="5-1"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="5-2"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="5-3"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="5-4"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="5-5"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="5-6"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="6-1"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="6-2"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="6-3"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="6-4"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="6-5"></div>
+	<div class="_JS_gameTile gameTile" data-comp-coordPoint="6-6"></div>
 </section>
 
 <script src="game.js"></script>

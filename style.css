@@ -78,6 +78,7 @@ summary {
     background-color: orange;
     flex-basis: 16%;
     margin-bottom: 5px;
+    background-size: cover;
 }
 
 .gameTile:nth-child(12n+1),
@@ -108,3 +109,5 @@ nav button {
 nav button.active {
 	border: solid 1px orange;
 }
+
+
