@@ -110,4 +110,44 @@ nav button.active {
 	border: solid 1px orange;
 }
 
+.scoreBoard {
+	position: fixed;
+    top: 0;
+    right: 0;
+    padding: 1em;
+    border: solid 2px green;
+    margin: 1em;
+}
 
+.messageQueue {
+	border: solid 2px black;
+	margin: 1em 0;
+}
+
+.messageQueue h2 {
+	background-color: #fff;
+    margin-left: 10px;
+    margin-top: -16px;
+    width: 100px
+}
+
+.messageQueue p {
+	margin-left: 10px;
+}
+
+@media (max-width: 439px) {
+
+	.scoreBoard {
+		margin: .5em;
+		padding: .25em;
+		top: initial;
+		bottom: 0;
+	}
+	.scoreBoard div {
+		display: inline-block;
+	}
+
+	.messageQueue {
+		margin-bottom: 3em;
+	}
+}

@@ -39,6 +39,10 @@ btlSHP.game = {
 		document.querySelector('._JS_userGameBoard').addEventListener('click', e => {
 
 		});
+
+		document.querySelector('._JS_boardSwitcher').addEventListener('click', e =>
+			this.toggleGameBoards(e, document.querySelector('._JS_gameboard.hidden'), document.querySelector('._JS_gameboard:not(.hidden)'))
+		);
 	},
 
 	initiateGame() {
@@ -111,7 +115,6 @@ btlSHP.game = {
 		const inputs = Array.apply(null, nodelist);
 
 		inputs.forEach((inp, idx) => (idx % 2 !== 0) && coordPairs.push(inputs[idx - 1].value + '|' + inputs[idx].value));
-		console.log(coordPairs, coordPairs.every((point, idx) => coordPairs.indexOf(point) === idx));
 		return coordPairs.every((point, idx) => coordPairs.indexOf(point) === idx);
 	},
 
@@ -147,6 +150,20 @@ btlSHP.game = {
 
 	show(domNodeClassList) {
 		domNodeClassList.remove('hidden');
+	},
+
+	toggleGameBoards(e, showGameboard, hideGameboard) {
+		/**
+		 * toggles comp & user gameboards
+		 * @param  {click event} e
+		 * @param { dom node } [showGameboard] [the gameboard to be shown]
+		 * @param { dom node } [hideGameboard] [the gameboard to be hidden]
+		 */
+		if (e.target.classList.contains('_JS_toggleGameBoard')) {
+			 hideGameboard.classList.add('hidden');
+			 showGameboard.classList.remove('hidden');
+			 e.target.innerText = e.target.innerText === 'Show Computer Game Board' ? 'Show My Game Board' : 'Show Computer Game Board';
+		}
 	}
 };
 

@@ -19,8 +19,7 @@
 </section>
 
 <nav class="hidden _JS_boardSwitcher">
-	<button class="_JS_showCompGameBoard">Show Computer Game Board</button>
-	<button class="_JS_showUserGameBoard">Show My Game Board</button>
+	<button class="_JS_toggleGameBoard">Show Computer Game Board</button>
 </nav>
 
 <section class="gameControls _JS_gameControls">
@@ -69,7 +68,7 @@
 	<button class="_JS_submitBoard">submit</button>
 </section>
 
-<section class="_JS_userGameBoard gameBoard hidden">
+<section class="_JS_userGameBoard gameBoard hidden _JS_gameboard">
 	<div class="_JS_gameTile gameTile" data-coordPoint="1-1"></div>
 	<div class="_JS_gameTile gameTile" data-coordPoint="1-2"></div>
 	<div class="_JS_gameTile gameTile" data-coordPoint="1-3"></div>
@@ -108,7 +107,18 @@
 	<div class="_JS_gameTile gameTile" data-coordPoint="6-6"></div>
 </section>
 
-<section class="_JS_compGameBoard gameBoard hidden">
+<div class="scoreBoard _JS_scoreBoard">
+	<div>
+		<span>User: </span>
+		<span class="_JS_userScore">0</span>
+	</div>
+	<div>
+		<span>Computer: </span>
+		<span class="_JS_compScore">0</span>
+	</div>
+</div>
+
+<section class="_JS_compGameBoard gameBoard hidden _JS_gameboard">
 	<div class="_JS_gameTile gameTile" data-comp-coordPoint="1-1"></div>
 	<div class="_JS_gameTile gameTile" data-comp-coordPoint="1-2"></div>
 	<div class="_JS_gameTile gameTile" data-comp-coordPoint="1-3"></div>
@@ -145,6 +155,13 @@
 	<div class="_JS_gameTile gameTile" data-comp-coordPoint="6-4"></div>
 	<div class="_JS_gameTile gameTile" data-comp-coordPoint="6-5"></div>
 	<div class="_JS_gameTile gameTile" data-comp-coordPoint="6-6"></div>
+</section>
+
+<section class="messageQueue">
+	<h2>Messages</h2>
+	<div class="messageQueue-container _JS_messageQueue">
+		<p>test Message</p>
+	</div>
 </section>
 
 <script src="game.js"></script>
