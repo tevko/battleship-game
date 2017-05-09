@@ -128,10 +128,6 @@ btlSHP.game = {
 		return coordPairs.every((point, idx) => coordPairs.indexOf(point) === idx);
 	},
 
-	show(nodeClassList) {
-		nodeClassList.remove('hidden');
-	},
-
 	createUserBoard(vesselInputs) {
 		const playerBoard = {};
 		vesselInputs.forEach(inp => {
