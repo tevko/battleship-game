@@ -10,8 +10,14 @@ btlSHP.game = {
 		userCoordsRecieved: false,
 		vessels: ['carrier', 'battleship', 'jetski', 'armedoctopus', 'squirtgun', 'gardenhose'],
 		score: {
-			user: 0,
-			computer: 0
+			userScore: 0,
+			userHits: [],
+			userMisses: [],
+			userTurnNumber: 0,
+			computerScore: 0,
+			compHits: [],
+			compMisses: [],
+			compTurnNumber: 0
 		}
 	},
 
@@ -36,8 +42,10 @@ btlSHP.game = {
 			});
 		}
 
-		document.querySelector('._JS_userGameBoard').addEventListener('click', e => {
-
+		document.querySelector('._JS_compGameBoard').addEventListener('click', e => {
+			const actualCoords = Object.keys(this.state.compBoard).map(v => `${this.state.compBoard[v].x}-${this.state.compBoard[v].y}`);
+			const guess = e.target.getAttribute('data-comp-coordpoint');
+			this.plotUserGuess(actualCoords, guess, e);
 		});
 
 		document.querySelector('._JS_boardSwitcher').addEventListener('click', e =>
@@ -51,13 +59,15 @@ btlSHP.game = {
 			this.state.playerBoard = this.createUserBoard(document.querySelectorAll('[data-for]'));
 			this.state.userCoordsRecieved = true;
 			this.hide(document.querySelector('._JS_gameControls').classList);
-			this.show(document.querySelector('._JS_userGameBoard').classList);
+			this.show(document.querySelector('._JS_compGameBoard').classList);
 			this.show(document.querySelector('._JS_boardSwitcher').classList);
+			this.show(document.querySelector('._JS_scoreBoard').classList);
+			this.show(document.querySelector('._JS_messageQueue').classList);
 			this.state.gameInitiated = true;
 			this.setIcons(this.state.playerBoard);
 			this.setIcons(this.state.compBoard, true);
 		} else {
-			this.setValidationErrorOnDom(document.querySelector('._JS_invalidCoords').classList);
+			this.show(document.querySelector('._JS_invalidCoords').classList);
 		}
 	},
 
@@ -100,7 +110,7 @@ btlSHP.game = {
 		 */
 		Object.keys(boardState).forEach(gamePiece => {
 			if (isComputer) {
-				document.querySelector(`[data-comp-coordpoint='${boardState[gamePiece].x}-${boardState[gamePiece].y}']`).style.backgroundImage = `url(${this.icons[gamePiece]})`;
+				//document.querySelector(`[data-comp-coordpoint='${boardState[gamePiece].x}-${boardState[gamePiece].y}']`).style.backgroundImage = `url(${this.icons[gamePiece]})`;
 			} else {
 				document.querySelector(`[data-coordpoint='${boardState[gamePiece].x}-${boardState[gamePiece].y}']`).style.backgroundImage = `url(${this.icons[gamePiece]})`;
 			}
@@ -118,7 +128,7 @@ btlSHP.game = {
 		return coordPairs.every((point, idx) => coordPairs.indexOf(point) === idx);
 	},
 
-	setValidationErrorOnDom(nodeClassList) {
+	show(nodeClassList) {
 		nodeClassList.remove('hidden');
 	},
 
@@ -138,6 +148,22 @@ btlSHP.game = {
 		});
 
 		return playerBoard
+	},
+	plotUserGuess(actualCoords, guess, clickEvent) {
+		/**
+		 * logs user guess to state
+		 * @param  {Array} actualCoords [mapped coord points]
+		 * @param  {String} guess        [data-attribute of clicked point]
+		 * @param  {Click} clickEvent   [user click]
+		 */
+		if (actualCoords.indexOf(guess) !== -1) {
+			this.state.score.userScore += 1;
+			this.state.score.userHits.push(clickEvent.target);
+		} else {
+			this.state.score.userMisses.push(clickEvent.target);
+		}
+		this.state.score.userTurnNumber += 1;
+		console.log(this.state.score);
 	},
 
 	reset() {
