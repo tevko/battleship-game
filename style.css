@@ -151,3 +151,26 @@ nav button.active {
 		margin-bottom: 3em;
 	}
 }
+
+
+.game-miss, .game-hit {
+	position: relative;
+}
+
+.game-miss:before, .game-hit:before {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    font-size: 4em;
+}
+
+.game-miss:before {
+	content: 'X';
+	color: #b99a9a;
+}
+
+.game-hit:before {
+	content: '\2713';
+	color: #4dd24d;
+}

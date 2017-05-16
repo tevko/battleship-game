@@ -27,7 +27,7 @@ btlSHP.game = {
 		battleship: 'https://s-media-cache-ak0.pinimg.com/736x/e4/cb/77/e4cb77a6ded005906bda2cef36b7234e.jpg',
 		jetski: 'http://i2.cdnds.net/12/45/618x328/gaming_gta_5_lifeboat.jpg',
 		squirtgun: 'http://teratalks.com/images/uploads/2016/08/20160817-tera-squirt.jpg',
-		gardenhose: 'http://ecx.images-amazon.com/images/I/411ChPj4WVL._SL256_.jpg'
+		gardenhose: 'http://ecx.images-amazon.com/images/I/411ChPj4WVL._SL256_.jpg',
 	},
 
 	init() {
@@ -43,9 +43,11 @@ btlSHP.game = {
 		}
 
 		document.querySelector('._JS_compGameBoard').addEventListener('click', e => {
-			const actualCoords = Object.keys(this.state.compBoard).map(v => `${this.state.compBoard[v].x}-${this.state.compBoard[v].y}`);
-			const guess = e.target.getAttribute('data-comp-coordpoint');
-			this.plotUserGuess(actualCoords, guess, e);
+			if (e.target.getAttribute('data-comp-coordpoint')) {
+				const actualCoords = Object.keys(this.state.compBoard).map(v => `${this.state.compBoard[v].x}-${this.state.compBoard[v].y}`);
+				const guess = e.target.getAttribute('data-comp-coordpoint');
+				this.plotUserGuess(actualCoords, guess, e);
+			}
 		});
 
 		document.querySelector('._JS_boardSwitcher').addEventListener('click', e =>
@@ -145,6 +147,7 @@ btlSHP.game = {
 
 		return playerBoard
 	},
+
 	plotUserGuess(actualCoords, guess, clickEvent) {
 		/**
 		 * logs user guess to state
@@ -155,8 +158,19 @@ btlSHP.game = {
 		if (actualCoords.indexOf(guess) !== -1) {
 			this.state.score.userScore += 1;
 			this.state.score.userHits.push(clickEvent.target);
+			Object.keys(this.state.compBoard).some(vessel => {
+				if (`${this.state.compBoard[vessel].x}-${this.state.compBoard[vessel].y}` === clickEvent.target.getAttribute('data-comp-coordpoint')) {
+					console.log(this.icons[vessel]);
+					clickEvent.target.style.backgroundImage = `url(${this.icons[vessel]})`;
+					clickEvent.target.classList.add('game-hit');
+					return true;
+				}
+				return false;
+			});
+
 		} else {
 			this.state.score.userMisses.push(clickEvent.target);
+			clickEvent.target.classList.add('game-miss');
 		}
 		this.state.score.userTurnNumber += 1;
 		console.log(this.state.score);
