@@ -112,7 +112,7 @@ btlSHP.game = {
 		 */
 		Object.keys(boardState).forEach(gamePiece => {
 			if (isComputer) {
-				//document.querySelector(`[data-comp-coordpoint='${boardState[gamePiece].x}-${boardState[gamePiece].y}']`).style.backgroundImage = `url(${this.icons[gamePiece]})`;
+				return;
 			} else {
 				document.querySelector(`[data-coordpoint='${boardState[gamePiece].x}-${boardState[gamePiece].y}']`).style.backgroundImage = `url(${this.icons[gamePiece]})`;
 			}
@@ -160,7 +160,6 @@ btlSHP.game = {
 			this.state.score.userHits.push(clickEvent.target);
 			Object.keys(this.state.compBoard).some(vessel => {
 				if (`${this.state.compBoard[vessel].x}-${this.state.compBoard[vessel].y}` === clickEvent.target.getAttribute('data-comp-coordpoint')) {
-					console.log(this.icons[vessel]);
 					clickEvent.target.style.backgroundImage = `url(${this.icons[vessel]})`;
 					clickEvent.target.classList.add('game-hit');
 					return true;
