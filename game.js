@@ -4,6 +4,7 @@ const btlSHP = window.btlSHP = window.btlSHP || {};
 
 btlSHP.game = {
 	state: {
+		userTurn: true,
 		compBoard: undefined,
 		playerBoard: undefined,
 		gameInitiated: false,
@@ -16,7 +17,7 @@ btlSHP.game = {
 			userTurnNumber: 0,
 			computerScore: 0,
 			compHits: [],
-			compMisses: [],
+			compGuesses: [],
 			compTurnNumber: 0
 		}
 	},
@@ -155,24 +156,100 @@ btlSHP.game = {
 		 * @param  {String} guess        [data-attribute of clicked point]
 		 * @param  {Click} clickEvent   [user click]
 		 */
-		if (actualCoords.indexOf(guess) !== -1) {
-			this.state.score.userScore += 1;
-			this.state.score.userHits.push(clickEvent.target);
-			Object.keys(this.state.compBoard).some(vessel => {
-				if (`${this.state.compBoard[vessel].x}-${this.state.compBoard[vessel].y}` === clickEvent.target.getAttribute('data-comp-coordpoint')) {
-					clickEvent.target.style.backgroundImage = `url(${this.icons[vessel]})`;
-					clickEvent.target.classList.add('game-hit');
-					return true;
-				}
-				return false;
-			});
-
-		} else {
-			this.state.score.userMisses.push(clickEvent.target);
-			clickEvent.target.classList.add('game-miss');
+		if (this.state.userTurn) {
+			if (actualCoords.indexOf(guess) !== -1) {
+				this.state.score.userScore += 1;
+				this.state.score.userHits.push(clickEvent.target);
+				Object.keys(this.state.compBoard).some(vessel => {
+					if (`${this.state.compBoard[vessel].x}-${this.state.compBoard[vessel].y}` === clickEvent.target.getAttribute('data-comp-coordpoint')) {
+						clickEvent.target.style.backgroundImage = `url(${this.icons[vessel]})`;
+						clickEvent.target.classList.add('game-hit');
+						this.paintGameUI({
+							message: `It's a hit! You sunk the computer's ${vessel}.`,
+							messageQueue: document.querySelector('._JS_messageQueue'),
+							scoreBoard: document.querySelector('._JS_userScore'),
+						});
+						return true;
+					}
+					return false;
+				});
+			} else {
+				this.state.score.userMisses.push(clickEvent.target);
+				clickEvent.target.classList.add('game-miss');
+				this.paintGameUI({
+					message: `It's a miss! Machines are superior. The computer laughs at your foolish human ways.`,
+					messageQueue: document.querySelector('._JS_messageQueue')
+				});
+			}
+			this.state.score.userTurnNumber += 1;
+			this.state.userTurn = false;
+			setTimeout(this.makeComputerGuess.bind(this), 2000);
 		}
-		this.state.score.userTurnNumber += 1;
-		console.log(this.state.score);
+	},
+
+	makeComputerGuess() {
+		this.paintGameUI({
+			message: `The computer is guessing!`,
+			messageQueue: document.querySelector('._JS_messageQueue')
+		});
+		setTimeout(function() {
+			if (this.state.score.compHits.length < 6) {
+				const guessCoords = () => {
+					const guess = `${Math.floor(Math.random() * (6 - 1 + 1) + 1)}-${Math.floor(Math.random() * (6 - 1 + 1) + 1)}`;
+					return this.state.score.compGuesses.indexOf(guess) === -1 ? guess : guessCoords();
+				};
+				const officialGuess = guessCoords();
+				const guessCoordsObj = {
+					x: officialGuess[0],
+					y: officialGuess[2]
+				};
+				const isMiss = Object.keys(this.state.playerBoard).every(vessel => `${this.state.playerBoard[vessel].x}-${this.state.playerBoard[vessel].y}` !== `${guessCoordsObj.x}-${guessCoordsObj.y}`);
+				if (isMiss) {
+					document.querySelector('._JS_userGameBoard').querySelector(`[data-coordpoint="${guessCoordsObj.x}-${guessCoordsObj.y}"]`).classList.add('game-miss');
+					this.paintGameUI({
+						message: `It's a miss! The computer curses you under its hypothetical breath.`,
+						messageQueue: document.querySelector('._JS_messageQueue')
+					});
+				} else {
+					Object.keys(this.state.playerBoard).some(vessel => {
+						if (`${this.state.playerBoard[vessel].x}-${this.state.playerBoard[vessel].y}` === `${guessCoordsObj.x}-${guessCoordsObj.y}`) {
+							this.state.score.compHits.push(`${guessCoordsObj.x}-${guessCoordsObj.y}`);
+							document.querySelector('._JS_userGameBoard').querySelector(`[data-coordpoint="${guessCoordsObj.x}-${guessCoordsObj.y}"]`).classList.add('game-hit');
+							this.paintGameUI({
+								message: `It's a hit! The computer humiliaates your human race by sinking your ${vessel}.`,
+								messageQueue: document.querySelector('._JS_messageQueue'),
+								scoreBoard: document.querySelector('._JS_compScore'),
+								turn: 'computer',
+							});
+							return true
+						}
+						return false
+					});
+				}
+
+				this.state.score.compGuesses.push(`${guessCoordsObj.x}-${guessCoordsObj.y}`);
+			}
+		}.bind(this), 1500);
+		setTimeout(function() {
+			this.state.userTurn = true;
+			this.paintGameUI({
+				message: `It's your turn!`,
+				messageQueue: document.querySelector('._JS_messageQueue')
+			});
+		}.bind(this), 3000);
+	},
+
+	paintGameUI(args) {
+		if (args.scoreBoard) {
+			args.scoreBoard.innerHTML = args.turn === 'computer' ? `<span class="flash-purple">${this.state.score.compHits.length}</span>` : `<span class="flash-purple">${this.state.score.userScore}</span>`;
+		}
+
+		if (args.message) {
+			args.messageQueue.innerHTML = `<h2>Messages</h2>
+			<div class="messageQueue-container flash">
+				<p>${args.message}</p>
+			</div>`;
+		}
 	},
 
 	reset() {

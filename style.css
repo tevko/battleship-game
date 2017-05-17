@@ -155,6 +155,7 @@ nav button.active {
 
 .game-miss, .game-hit {
 	position: relative;
+	pointer-events: none;
 }
 
 .game-miss:before, .game-hit:before {
@@ -172,5 +173,29 @@ nav button.active {
 
 .game-hit:before {
 	content: '\2713';
-	color: #4dd24d;
+	color: #d24dba;
+}
+
+.flash-purple {
+	animation: 1s flashPurple forwards;
+}
+
+.flash {
+	animation: 1s flash forwards;
+}
+
+@keyframes flash {
+	from {
+		background-color: yellow;
+	} to {
+		background-color: transparent;
+	}
+}
+
+@keyframes flashPurple {
+	from {
+		background-color: #b400ff;
+	} to {
+		background-color: transparent;
+	}
 }
