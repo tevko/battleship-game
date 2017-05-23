@@ -81,6 +81,10 @@ summary {
     background-size: cover;
 }
 
+.isUserBoard.gameTile {
+	cursor: pointer;
+}
+
 .gameTile:nth-child(12n+1),
 .gameTile:nth-child(12n+3),
 .gameTile:nth-child(12n+5),
@@ -198,4 +202,35 @@ nav button.active {
 	} to {
 		background-color: transparent;
 	}
+}
+
+.final-screen {
+	position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    padding: 1em;
+    text-align: center;
+}
+
+@media (max-width: 620px) {
+	.final-screen {
+		font-size: 1em;
+	}
+}
+
+.final-screen.win {
+	background-color: purple;
+    color: white;
+}
+
+.final-screen.loss {
+	background-color: black;
+	color: red;
 }

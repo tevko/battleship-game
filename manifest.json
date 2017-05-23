@@ -1,0 +1,10 @@
+{
+    "lang": "en-US",
+    "short_name": "BATTLESHIP",
+    "name": "BATTLESHIP!!!1!",
+    "start_url": "/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#860986",
+    "background_color": "#000000"
+}

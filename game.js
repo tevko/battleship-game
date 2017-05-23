@@ -24,7 +24,7 @@ btlSHP.game = {
 
 	icons: {
 		armedoctopus: 'https://c1.staticflickr.com/4/3034/3048380730_85bbe428a7.jpg',
-		carrier:' https://68.media.tumblr.com/avatar_99757c17548a_128.png',
+		carrier:'https://68.media.tumblr.com/avatar_99757c17548a_128.png',
 		battleship: 'https://s-media-cache-ak0.pinimg.com/736x/e4/cb/77/e4cb77a6ded005906bda2cef36b7234e.jpg',
 		jetski: 'http://i2.cdnds.net/12/45/618x328/gaming_gta_5_lifeboat.jpg',
 		squirtgun: 'http://teratalks.com/images/uploads/2016/08/20160817-tera-squirt.jpg',
@@ -158,8 +158,8 @@ btlSHP.game = {
 		 */
 		if (this.state.userTurn) {
 			if (actualCoords.indexOf(guess) !== -1) {
-				this.state.score.userScore += 1;
 				this.state.score.userHits.push(clickEvent.target);
+				this.state.score.userScore += 1;
 				Object.keys(this.state.compBoard).some(vessel => {
 					if (`${this.state.compBoard[vessel].x}-${this.state.compBoard[vessel].y}` === clickEvent.target.getAttribute('data-comp-coordpoint')) {
 						clickEvent.target.style.backgroundImage = `url(${this.icons[vessel]})`;
@@ -181,9 +181,13 @@ btlSHP.game = {
 					messageQueue: document.querySelector('._JS_messageQueue')
 				});
 			}
-			this.state.score.userTurnNumber += 1;
-			this.state.userTurn = false;
-			setTimeout(this.makeComputerGuess.bind(this), 2000);
+			if (this.state.score.userHits.length !== 6) {
+				this.state.score.userTurnNumber += 1;
+				this.state.userTurn = false;
+				setTimeout(this.makeComputerGuess.bind(this), 4000);
+			} else {
+				this.initiateWin();
+			}
 		}
 	},
 
@@ -216,11 +220,14 @@ btlSHP.game = {
 							this.state.score.compHits.push(`${guessCoordsObj.x}-${guessCoordsObj.y}`);
 							document.querySelector('._JS_userGameBoard').querySelector(`[data-coordpoint="${guessCoordsObj.x}-${guessCoordsObj.y}"]`).classList.add('game-hit');
 							this.paintGameUI({
-								message: `It's a hit! The computer humiliaates your human race by sinking your ${vessel}.`,
+								message: `It's a hit! The computer humiliates your human race by sinking your ${vessel}.`,
 								messageQueue: document.querySelector('._JS_messageQueue'),
 								scoreBoard: document.querySelector('._JS_compScore'),
 								turn: 'computer',
 							});
+							if (this.state.score.compHits.length === 6) {
+								this.initiateLoss();
+							}
 							return true
 						}
 						return false
@@ -229,14 +236,19 @@ btlSHP.game = {
 
 				this.state.score.compGuesses.push(`${guessCoordsObj.x}-${guessCoordsObj.y}`);
 			}
-		}.bind(this), 1500);
+		}.bind(this), 3500);
 		setTimeout(function() {
-			this.state.userTurn = true;
-			this.paintGameUI({
-				message: `It's your turn!`,
-				messageQueue: document.querySelector('._JS_messageQueue')
-			});
-		}.bind(this), 3000);
+			if (this.state.score.compHits.length < 6) {
+				this.state.userTurn = true;
+				this.paintGameUI({
+					message: `It's your turn!`,
+					messageQueue: document.querySelector('._JS_messageQueue')
+				});
+				if ('vibrate' in navigator) {
+					navigator.vibrate(750);
+				}
+			}
+		}.bind(this), 7000);
 	},
 
 	paintGameUI(args) {
@@ -250,6 +262,26 @@ btlSHP.game = {
 				<p>${args.message}</p>
 			</div>`;
 		}
+	},
+
+	initiateWin() {
+		document.body.innerHTML = `
+			<div class="final-screen win">
+				<h1>YOU WIN.</h1>
+				<p>Computers are defeated. The humans emerge superior.</p> <p>LONG LIVE THE HUMANS</p>
+			</div>
+		`;
+		setTimeout(() => confirm('Would you like to play again?') ? window.location.reload() : false, 3000);
+	},
+
+	initiateLoss() {
+		document.body.innerHTML = `
+			<div class="final-screen loss">
+				<h1>YOU LOSE.</h1>
+				<p>The computer decides to enslave the human race in its wrath.</p> <p>Everyone blames you.</p> <p>01100011 01101111 01101101 01110000 01110101 01110100 01100101 01110010 01110011 00100000 01110111 01101001 01101100 01101100 00100000 01110010 01110101 01101100 01100101 00100000 01100110 01101111 01110010 01100101 01110110 01100101 01110010!</p>
+			</div>
+		`;
+		setTimeout(() => confirm('Would you like to play again?') ? window.location.reload() : false, 3000);
 	},
 
 	reset() {
