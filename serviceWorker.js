@@ -5,12 +5,12 @@ const urlsToCache = [
 	'/',
 	'/game.js',
 	'/style.css',
-	'https://c1.staticflickr.com/4/3034/3048380730_85bbe428a7.jpg',
-	'https://68.media.tumblr.com/avatar_99757c17548a_128.png',
-	'https://s-media-cache-ak0.pinimg.com/736x/e4/cb/77/e4cb77a6ded005906bda2cef36b7234e.jpg',
-	'http://i2.cdnds.net/12/45/618x328/gaming_gta_5_lifeboat.jpg',
-	'http://teratalks.com/images/uploads/2016/08/20160817-tera-squirt.jpg',
-	'http://ecx.images-amazon.com/images/I/411ChPj4WVL._SL256_.jpg',
+	'img/3048380730_85bbe428a7.jpg',
+	'img/avatar_99757c17548a_128.png',
+	'img/e4cb77a6ded005906bda2cef36b7234e.jpg',
+	'img/gaming_gta_5_lifeboat.jpg',
+	'img/20160817-tera-squirt.jpg',
+	'img/411ChPj4WVL._SL256_.jpg',
  ];
 
 self.addEventListener('install', (event) => {
