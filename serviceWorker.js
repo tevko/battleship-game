@@ -1,10 +1,10 @@
 // The files we want to cache
-const CACHE_NAME = 'site-cache-v2';
+const CACHE_NAME = 'site-cache-v3';
 
 const urlsToCache = [
 	'/',
-	'/game.js',
-	'/style.css',
+	'game.js',
+	'style.css',
 	'img/3048380730_85bbe428a7.jpg',
 	'img/avatar_99757c17548a_128.png',
 	'img/e4cb77a6ded005906bda2cef36b7234e.jpg',
