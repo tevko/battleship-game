@@ -2,7 +2,7 @@
     "lang": "en-US",
     "short_name": "BATTLESHIP",
     "name": "BATTLESHIP!!!1!",
-    "start_url": "/",
+    "start_url": "/battleship-game/",
     "display": "standalone",
     "orientation": "portrait",
     "theme_color": "#860986",
