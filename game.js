@@ -23,12 +23,12 @@ btlSHP.game = {
 	},
 
 	icons: {
-		armedoctopus: 'https://c1.staticflickr.com/4/3034/3048380730_85bbe428a7.jpg',
-		carrier:'https://68.media.tumblr.com/avatar_99757c17548a_128.png',
-		battleship: 'https://s-media-cache-ak0.pinimg.com/736x/e4/cb/77/e4cb77a6ded005906bda2cef36b7234e.jpg',
-		jetski: 'http://i2.cdnds.net/12/45/618x328/gaming_gta_5_lifeboat.jpg',
-		squirtgun: 'http://teratalks.com/images/uploads/2016/08/20160817-tera-squirt.jpg',
-		gardenhose: 'http://ecx.images-amazon.com/images/I/411ChPj4WVL._SL256_.jpg',
+		armedoctopus: 'img/3048380730_85bbe428a7.jpg',
+		carrier:'img/avatar_99757c17548a_128.png',
+		battleship: 'img/e4cb77a6ded005906bda2cef36b7234e.jpg',
+		jetski: 'img/gaming_gta_5_lifeboat.jpg',
+		squirtgun: 'img/20160817-tera-squirt.jpg',
+		gardenhose: 'img/411ChPj4WVL._SL256_.jpg',
 	},
 
 	init() {
