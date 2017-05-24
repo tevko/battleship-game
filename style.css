@@ -141,18 +141,22 @@ nav button.active {
 
 @media (max-width: 439px) {
 
+	nav {
+		margin-top: 1.5em;
+	}
+
 	.scoreBoard {
-		margin: .5em;
+		margin: 0;
 		padding: .25em;
-		top: initial;
-		bottom: 0;
+		position: relative;
 	}
 	.scoreBoard div {
 		display: inline-block;
 	}
 
 	.messageQueue {
-		margin-bottom: 3em;
+		margin-bottom: 1.5em;
+		margin-top: 2em;
 	}
 }
 
