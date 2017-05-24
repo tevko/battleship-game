@@ -1,5 +1,5 @@
 // The files we want to cache
-const CACHE_NAME = 'site-cache-v4';
+const CACHE_NAME = 'site-cache-v5';
 
 const urlsToCache = [
 	'/',
@@ -11,6 +11,8 @@ const urlsToCache = [
 	'img/gaming_gta_5_lifeboat.jpg',
 	'img/20160817-tera-squirt.jpg',
 	'img/411ChPj4WVL._SL256_.jpg',
+	'img/submarine.jpg',
+	'img/submarine_32.jpg',
  ];
 
 self.addEventListener('install', (event) => {
