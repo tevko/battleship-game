@@ -108,6 +108,7 @@ nav button {
 	font-weight: bold;
 	color: white;
 	margin: 0px 5px;
+	background-color: #1a465a;
 }
 
 nav button.active {
