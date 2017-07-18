@@ -1,8 +1,8 @@
 // The files we want to cache
-const CACHE_NAME = 'site-cache-v5';
+const CACHE_NAME = 'site-cache-v6';
 
 const urlsToCache = [
-	'/',
+	'/battleship-game/',
 	'game.js',
 	'style.css',
 	'img/3048380730_85bbe428a7.jpg',
@@ -11,8 +11,7 @@ const urlsToCache = [
 	'img/gaming_gta_5_lifeboat.jpg',
 	'img/20160817-tera-squirt.jpg',
 	'img/411ChPj4WVL._SL256_.jpg',
-	'img/submarine.jpg',
-	'img/submarine_32.jpg',
+	'img/submarine_32.png',
  ];
 
 self.addEventListener('install', (event) => {
