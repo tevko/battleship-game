@@ -12,6 +12,7 @@ const urlsToCache = [
 	'img/20160817-tera-squirt.jpg',
 	'img/411ChPj4WVL._SL256_.jpg',
 	'img/submarine_32.png',
+	'manifest.json'
  ];
 
 self.addEventListener('install', (event) => {
